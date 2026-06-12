@@ -1,0 +1,28 @@
+{
+  "name": "@ionity/server",
+  "version": "0.1.0",
+  "description": "Ionity-CSI control plane: MQTT ingest, SQLite persistence, calibration sessions, localization, REST + WebSocket.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/server.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "node --experimental-strip-types --import ../../tools/strip-types-loader.mjs --watch src/server.ts",
+    "start": "node dist/server.js",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@ionity/metrification": "0.1.0",
+    "@fastify/static": "7.0.4",
+    "@fastify/websocket": "8.3.1",
+    "better-sqlite3": "11.3.0",
+    "fastify": "4.28.1",
+    "mqtt": "5.10.1",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "7.6.11",
+    "@types/node": "22.7.5",
+    "typescript": "5.6.3"
+  }
+}

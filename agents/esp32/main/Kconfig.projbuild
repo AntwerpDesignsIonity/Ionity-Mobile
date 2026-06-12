@@ -1,0 +1,33 @@
+menu "Ionity-CSI Agent"
+
+config IONITY_WIFI_SSID
+    string "WiFi SSID"
+    default "myssid"
+    help
+        SSID of the AP to associate with. CSI is measured from this AP's frames.
+
+config IONITY_WIFI_PASSWORD
+    string "WiFi password"
+    default "mypassword"
+
+config IONITY_MQTT_URI
+    string "MQTT broker URI"
+    default "mqtt://192.168.1.10:1883"
+    help
+        URI of the Mosquitto broker, e.g. mqtt://<server-ip>:1883
+
+config IONITY_DEVICE_ID
+    string "Device id"
+    default "esp32-1"
+
+config IONITY_DWELL_MS
+    int "Default dwell window (ms)"
+    default 4000
+
+config IONITY_MAX_FRAMES
+    int "Max CSI frames per capture"
+    default 8
+    help
+        Cap on CSI frames included per published capture (limits JSON size).
+
+endmenu

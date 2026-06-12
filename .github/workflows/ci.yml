@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: ["Root-Main", "claude/**"]
+  pull_request:
+
+jobs:
+  core:
+    name: Core library + server
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22" # tests use --experimental-strip-types (Node ≥22.6)
+      - run: npm install
+      - name: Build core library
+        run: npm run build --workspace @ionity/metrification
+      - name: Test core library
+        run: npm run test --workspace @ionity/metrification
+      - name: Build server
+        run: npm run build --workspace @ionity/server
+
+  dashboard:
+    name: Dashboard build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install
+      - name: Build core library (dependency)
+        run: npm run build --workspace @ionity/metrification
+      - name: Build dashboard
+        run: npm run build --workspace @ionity/dashboard
+
+  python:
+    name: Agent & ML (compile)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install agent + ML deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r agents/linux-nexmon/requirements.txt -r ml/requirements.txt
+      - name: Byte-compile
+        run: python -m compileall agents/linux-nexmon/ionity_agent ml/features ml/pipelines
