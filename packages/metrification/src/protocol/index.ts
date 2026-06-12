@@ -4,7 +4,6 @@
  * boundary — agents are untrusted devices on the network.
  */
 import { z } from "zod";
-import { COMPASS_DIRECTIONS } from "../models/index.js";
 
 /** Root namespace for all Ionity-CSI MQTT topics. */
 export const TOPIC_ROOT = "ionity";
@@ -23,9 +22,9 @@ export const topics = {
   allStatus: () => `${TOPIC_ROOT}/+/status`,
 } as const;
 
-export const compassSchema = z.enum(
-  COMPASS_DIRECTIONS as unknown as [string, ...string[]],
-);
+// Literal tuple (not a cast) so z.infer yields the CompassDirection union, which
+// keeps validated messages assignable to the typed library models.
+export const compassSchema = z.enum(["N", "NE", "E", "SE", "S", "SW", "W", "NW"]);
 
 export const accessPointSchema = z.object({
   bssid: z.string().min(1),

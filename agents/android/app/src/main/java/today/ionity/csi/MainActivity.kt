@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -120,7 +121,7 @@ class MainActivity : ComponentActivity() {
                     val mark = if (ap.bssid == selected?.bssid) "● " else "○ "
                     Text(
                         "$mark${ap.ssid.ifBlank { "(hidden)" }}  ${ap.rssi?.toInt()} dBm  ${ap.bssid}",
-                        Modifier.fillMaxWidth().padding(vertical = 6.dp).clickableNoRipple { selected = ap },
+                        Modifier.fillMaxWidth().padding(vertical = 6.dp).clickable { selected = ap },
                     )
                 }
             }
@@ -166,7 +167,3 @@ class MainActivity : ComponentActivity() {
         mqtt.publish(Topics.capture(deviceId), json.encodeToString(Capture.serializer(), capture))
     }
 }
-
-/** Minimal click modifier without pulling in foundation interaction sources. */
-private fun Modifier.clickableNoRipple(onClick: () -> Unit): Modifier =
-    this.then(androidx.compose.foundation.clickable(onClickLabel = null) { onClick() })
