@@ -1,0 +1,29 @@
+{
+  "name": "ionity-csi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WiFi CSI/RSSI Metrification & 3D localization platform — Ionity Metrification CSI",
+  "license": "MIT",
+  "author": "Ionity Global (Pty) Ltd",
+  "type": "module",
+  "workspaces": [
+    "packages/metrification",
+    "packages/server",
+    "packages/dashboard"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace @ionity/metrification && npm run build --workspace @ionity/server && npm run build --workspace @ionity/dashboard",
+    "build:lib": "npm run build --workspace @ionity/metrification",
+    "test": "npm run test --workspace @ionity/metrification",
+    "dev:server": "npm run dev --workspace @ionity/server",
+    "dev:dashboard": "npm run dev --workspace @ionity/dashboard",
+    "broker": "docker compose up -d mosquitto",
+    "broker:logs": "docker compose logs -f mosquitto"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "typescript": "5.6.3"
+  }
+}

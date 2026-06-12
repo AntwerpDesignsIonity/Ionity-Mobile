@@ -1,0 +1,3 @@
+# pnpm users: `pnpm install`. npm users: `npm install` (root package.json declares the same workspaces).
+packages:
+  - "packages/*"

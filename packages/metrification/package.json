@@ -1,0 +1,29 @@
+{
+  "name": "@ionity/metrification",
+  "version": "0.1.0",
+  "description": "Ionity Metrification CSI — protocol, geometry, ranging, CSI metrics, calibration & localization core (MIT).",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -p tsconfig.json --watch",
+    "test": "node --test --experimental-strip-types --import ../../tools/strip-types-loader.mjs test/*.test.ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "typescript": "5.6.3",
+    "@types/node": "22.7.5"
+  }
+}

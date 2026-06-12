@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Runtime data — REAL captures only; never commit measurement data
+*.sqlite
+*.sqlite-journal
+*.db
+data/*.json
+data/*.csv
+data/*.ndjson
+!data/.gitkeep
+ml/data/*
+!ml/data/.gitkeep
+ml/models/*
+!ml/models/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# ESP-IDF
+agents/esp32/build/
+agents/esp32/sdkconfig
+agents/esp32/sdkconfig.old
+managed_components/
+
+# Android
+agents/android/.gradle/
+agents/android/build/
+agents/android/app/build/
+agents/android/local.properties
+*.apk
+*.keystore
+
+# Env / secrets
+.env
+.env.local
+*.local
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.log

@@ -1,0 +1,10 @@
+# CSI must be enabled in the WiFi driver.
+CONFIG_ESP_WIFI_CSI_ENABLED=y
+
+# Bigger MQTT/outbox + main task stack for JSON building.
+CONFIG_MQTT_OUTBOX_DATA_ON_EXTERNAL_MEMORY=n
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+
+# Reasonable WiFi buffers for sustained CSI callbacks.
+CONFIG_ESP_WIFI_STATIC_RX_BUFFER_NUM=16
+CONFIG_ESP_WIFI_DYNAMIC_RX_BUFFER_NUM=32
