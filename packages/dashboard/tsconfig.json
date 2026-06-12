@@ -6,7 +6,6 @@
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "types": ["node"],
     "noEmit": true,
     "declaration": false,
     "declarationMap": false

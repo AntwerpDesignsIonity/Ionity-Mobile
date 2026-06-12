@@ -4,7 +4,7 @@
  * the built dashboard into one process.
  */
 import Fastify from "fastify";
-import websocket from "@fastify/websocket";
+import websocket, { type SocketStream } from "@fastify/websocket";
 import fastifyStatic from "@fastify/static";
 import { existsSync } from "node:fs";
 import { loadConfig } from "./config.js";
@@ -34,7 +34,7 @@ async function main(): Promise<void> {
 
   await app.register(websocket);
   await app.register(async (instance) => {
-    instance.get("/ws", { websocket: true }, (connection) => {
+    instance.get("/ws", { websocket: true }, (connection: SocketStream) => {
       // @fastify/websocket v8: connection.socket is the underlying ws WebSocket.
       hub.add(connection.socket as unknown as WsLike);
     });
